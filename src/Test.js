@@ -21,6 +21,7 @@ class App extends Component {
       this.setState({ elapsedTime: this.state.elapsedTime + 1 });
     }, 1000);
   }
+
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -28,8 +29,9 @@ class App extends Component {
   render() {
     const { fullName, bio, imgSrc, profession } = this.state.person;
     const { show, elapsedTime } = this.state;
+
     return (
-      <div className="flex flex-col items-center bg-blue-200 border-blue-400 w-60 mx-auto rounded-lg">
+      <div className="container mx-auto mt-5">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={this.toggleProfile}
@@ -37,22 +39,23 @@ class App extends Component {
           Toggle Profile
         </button>
         {show && (
-          <div className="mt-5 items-center">
+          <div className="mt-5">
             <img
               src={imgSrc}
               alt={fullName}
-              className="rounded-lg w-32 h-32 mx-auto"
+              className="rounded-full w-32 h-32 mx-auto"
             />
-            <h2 className="text-xl font-bold mt-3 items-center mx-auto">
-              {fullName}
-            </h2>
+            <h2 className="text-xl font-bold mt-3">{fullName}</h2>
             <p className="text-gray-600">{profession}</p>
             <p className="mt-2">{bio}</p>
           </div>
         )}
-        <p className="mt-5">Time elapsed: {elapsedTime} seconds</p>
+        <p className="mt-5">
+          Time elapsed since component mounted: {elapsedTime} seconds
+        </p>
       </div>
     );
   }
 }
+
 export default App;
